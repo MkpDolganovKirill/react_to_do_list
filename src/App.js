@@ -13,7 +13,7 @@ const App = () => {
 
   const connect = async () => {
     await axios.get('http://localhost:8000/allTasks').then(res => {
-      setTasks(res.data.data);
+      sortTasks(res.data.data);
     })
   };
 
@@ -21,8 +21,17 @@ const App = () => {
     await axios.post('http://localhost:8000/createTask', newTask).then(res => { });
 
     await axios.get('http://localhost:8000/allTasks').then(res => {
-      setTasks(res.data.data);
+      sortTasks(res.data.data);
     });
+  };
+
+  const sortTasks = (sortingTasks) => {
+    const newTasks = [...sortingTasks];
+    newTasks.sort((a, b) => {
+      return a.isCheck < b.isCheck ? -1 : 1;
+    });
+
+    setTasks(newTasks);
   };
 
   return (
