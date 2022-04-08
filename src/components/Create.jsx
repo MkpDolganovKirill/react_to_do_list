@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import '../styles/Create.scss';
 
-const Create = ({ create }) => {
+const Create = ({ updateTasks }) => {
 
   const [value, setValue] = useState('');
 
-  const createTask = () => {
+  const createTask = async () => {
     if (value.trim()) {
       const newTask = {
         text: value.trim(),
         isCheck: false
       }
-      create(newTask);
+      await axios.post('http://localhost:8000/createTask', newTask).then(res => { });
+      updateTasks();
       setValue('');
     } else {
       alert("You can't add empty task! Please enter something...");
@@ -24,7 +26,6 @@ const Create = ({ create }) => {
 
   return (
     <div className="create-component">
-      <h1 className="title">TO-DO LIST</h1>
       <div className="create-form">
         <input
           type={'text'}

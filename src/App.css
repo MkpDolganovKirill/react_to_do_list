@@ -1,3 +1,12 @@
 .App {
   text-align: center;
 }
+
+.title {
+  margin: 20px;
+  font-weight: 800;
+  font-family: 'Open sans', sans-serif;
+  cursor: default;
+  color: rgb(94, 94, 255);
+  text-shadow: 2px -2px black;
+}

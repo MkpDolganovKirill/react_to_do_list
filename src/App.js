@@ -6,49 +6,17 @@ import Tasks from './components/Tasks';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
+  const [updateFlag, setUpdateFlag] = useState(true);
 
   useEffect(() => {
-    connect();
-  }, []);
+    if (updateFlag) connect();
+  }, [updateFlag]);
 
   const connect = async () => {
     await axios.get('http://localhost:8000/allTasks').then(res => {
       sortTasks(res.data.data);
-    })
-  };
-
-  const createNewTask = async (newTask) => {
-    await axios.post('http://localhost:8000/createTask', newTask).then(res => { });
-
-    await axios.get('http://localhost:8000/allTasks').then(res => {
-      sortTasks(res.data.data);
     });
-  };
-
-  const editTask = async (editingTask) => {
-    const newTasks = [...tasks];
-    const isCheck = editingTask.isCheck;
-    const updateTask = { ...editingTask, isCheck: !isCheck }
-    await axios.patch('http://localhost:8000/updateTask', updateTask).then(res => { });
-
-    newTasks.forEach((el, index) => {
-      if (el._id === updateTask._id) {
-        newTasks[index] = updateTask;
-      };
-    });
-    sortTasks(newTasks);
-  };
-
-  const deleteTask = async (taskId) => {
-    const newTasks = [...tasks];
-    await axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
-
-    newTasks.forEach((el, index) => {
-      if (el._id === taskId) {
-        newTasks.splice(index, 1);
-      };
-    });
-    setTasks(newTasks);
+    updateTasks();
   };
 
   const sortTasks = (sortingTasks) => {
@@ -60,10 +28,15 @@ const App = () => {
     setTasks(newTasks);
   };
 
+  const updateTasks = () => {
+    setUpdateFlag(!updateFlag);
+  };
+
   return (
     <div className="App">
-      <Create create={createNewTask} />
-      <Tasks allTasks={tasks} edit={editTask} remove={deleteTask} />
+      <h1 className="title">TO-DO LIST</h1>
+      <Create updateTasks={updateTasks} />
+      <Tasks allTasks={tasks} updateTasks={updateTasks} />
     </div>
   );
 };
