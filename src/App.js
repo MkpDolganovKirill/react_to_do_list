@@ -25,6 +25,18 @@ const App = () => {
     });
   };
 
+  const deleteTask = async (taskId) => {
+    const newTasks = [...tasks];
+    await axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
+
+    newTasks.forEach((el, index) => {
+      if (el._id === taskId) {
+        newTasks.splice(index, 1);
+      };
+    });
+    setTasks(newTasks);
+  };
+
   const sortTasks = (sortingTasks) => {
     const newTasks = [...sortingTasks];
     newTasks.sort((a, b) => {
@@ -37,7 +49,7 @@ const App = () => {
   return (
     <div className="App">
       <Create create={createNewTask} />
-      <Tasks allTasks={tasks} />
+      <Tasks allTasks={tasks} remove={deleteTask} />
     </div>
   );
 };

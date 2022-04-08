@@ -4,7 +4,7 @@ import '../styles/Tasks.scss';
 import Checkbox from '@mui/material/Checkbox';
 import grey from '@mui/material/colors/grey';
 
-const Tasks = ({ allTasks }) => {
+const Tasks = ({ allTasks, remove }) => {
 
   return (
     <div className='tasks'>
@@ -35,6 +35,7 @@ const Tasks = ({ allTasks }) => {
               <img
                 className={isCheck ? 'trash-icon-complete' : 'trash-icon'}
                 src={trash} alt='delete'
+                onClick={() => remove(_id)}
               />
             </div>
           );
