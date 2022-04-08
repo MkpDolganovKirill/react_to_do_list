@@ -4,7 +4,7 @@ import '../styles/Tasks.scss';
 import Checkbox from '@mui/material/Checkbox';
 import grey from '@mui/material/colors/grey';
 
-const Tasks = ({ allTasks, remove }) => {
+const Tasks = ({ allTasks, edit, remove }) => {
 
   return (
     <div className='tasks'>
@@ -31,6 +31,7 @@ const Tasks = ({ allTasks, remove }) => {
                 type={'checkbox'}
                 checked={isCheck}
                 className={"task-checkbox"}
+                onChange={e => edit(task)}
               />
               <img
                 className={isCheck ? 'trash-icon-complete' : 'trash-icon'}
