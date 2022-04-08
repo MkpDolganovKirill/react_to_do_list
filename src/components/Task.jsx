@@ -13,8 +13,10 @@ const Task = ({ index, task, updateTasks }) => {
   const [value, setValue] = useState(text);
 
   const deleteTask = async (taskId) => {
-    await axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
-    updateTasks();
+    if (window.confirm('Are you sure?')) {
+      await axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
+      updateTasks();
+    };
   };
 
   const editCheck = async (editingTask) => {
@@ -25,10 +27,15 @@ const Task = ({ index, task, updateTasks }) => {
   };
 
   const editTask = async (editingTask) => {
-    const updateTask = { ...editingTask, text: value }
-    await axios.patch('http://localhost:8000/updateTask', updateTask).then(res => { });
-    updateTasks();
-    setIsEdit(!isEdit);
+    if (value.trim()) {
+      const updateTask = { ...editingTask, text: value }
+      await axios.patch('http://localhost:8000/updateTask', updateTask).then(res => { });
+      updateTasks();
+      setIsEdit(!isEdit);
+    } else {
+      deleteTask(_id);
+    }
+    
   };
 
   const cancelSet = () => {
