@@ -27,6 +27,7 @@
 .task-complete {
   background: lightgrey;
   color: black;
+  text-decoration: line-through;
   transition: .5s;
 }
 
@@ -38,10 +39,16 @@
 }
 
 .task-checkbox {
-  width: 30%;
+  width: 10%;
 }
 
-.trash-icon, .trash-icon-complete {
+.icons-container {
+  width: 20%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon, .trash-icon-complete {
   width: 50px;
   padding: 5px;
   border: 1px solid lightgrey;
@@ -59,7 +66,20 @@
   cursor: pointer;
 }
 
-.trash-icon:hover {
+.icon:hover {
   cursor: pointer;
   background: white;
+}
+
+.edit-input {
+  width: 70%;
+  height: 50px;
+  border-radius: 15px;
+  padding: 0 20px;
+  border: 1px solid lightgrey;
+  font-size: 1.5rem;
+}
+
+.hidden {
+  display: none;
 }
