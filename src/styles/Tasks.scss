@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.tasks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.task, .task-complete {
+  width: 700px;
+  margin-top: 10px;
+  display: flex;
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid lightgrey;
+  box-sizing: border-box;
+  align-items: center;
+  background: rgb(94, 94, 255);
+  color: white;
+  transition: .5s;
+}
+
+.task-complete {
+  background: lightgrey;
+  color: black;
+}
+
+.task-text {
+  width: 70%;
+  text-align: left;
+  font-size: 1.5rem;
+  cursor: default;
+}
+
+.task-checkbox {
+  width: 30%;
+}
+
+.trash-icon, .trash-icon-complete {
+  width: 50px;
+  padding: 5px;
+  border: 1px solid lightgrey;
+  background: white;
+  border-radius: 10px;
+  transition: .5s;
+}
+
+.trash-icon-complete {
+  background: white;
+}
+
+.trash-icon-complete:hover {
+  background: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+}
+
+.trash-icon:hover {
+  cursor: pointer;
+  background: white;
+}
