@@ -36,14 +36,21 @@
   text-align: left;
   font-size: 1.5rem;
   cursor: default;
+  overflow-wrap: break-word;
+}
+
+.text-check {
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .task-checkbox {
-  width: 10%;
+  width: 30%;
 }
 
 .icons-container {
-  width: 20%;
+  width: 70%;
   display: flex;
   justify-content: space-around;
 }
@@ -82,4 +89,49 @@
 
 .hidden {
   display: none;
+}
+
+@media (min-device-width: 280px) and (max-device-width: 701px) {
+  .tasks {
+    width: 95%;
+    justify-content: center;
+  }
+
+  .task,
+  .task-complete {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .task-text {
+    width: 100%;
+  }
+
+  .text-check {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .task-checkbox {
+    width: 20%;
+  }
+  
+  .icons-container {
+    width: 40%;
+    display: flex;
+    justify-content: end;
+  }
+  .icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
+
+  .edit-input {
+    width: 75%;
+    height: 40px;
+  }
 }

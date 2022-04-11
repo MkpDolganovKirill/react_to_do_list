@@ -3,6 +3,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .create-component {
@@ -10,6 +11,7 @@
 }
 
 .create-form {
+
   height: 50px;
   display: flex;
   justify-content: center;
@@ -43,4 +45,24 @@
 .create-form-button:hover {
   font-size: 1.1rem;
   background: black;
+}
+@media (min-device-width: 280px) and (max-device-width: 701px) {
+  .create-component {
+    width: 100%;
+    margin: 20px 0;
+  }
+  
+  .create-form {
+    width: 99%;
+    margin: 0;
+  }
+
+  .create-form-input {
+    width: 70%;
+  }
+
+  .create-form-button {
+    width: 30%;
+  }
+
 }
