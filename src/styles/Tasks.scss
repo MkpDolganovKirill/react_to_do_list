@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .tasks {
   display: flex;
   flex-direction: column;
@@ -10,150 +11,9 @@
   transition: .5s;
 }
 
-.task, .task-complete {
-  width: 700px;
-  margin-top: 10px;
-  display: flex;
-  padding: 15px;
-  border-radius: 15px;
-  border: 1px solid lightgrey;
-  box-sizing: border-box;
-  align-items: center;
-  background: rgb(94, 94, 255);
-  color: white;
-  transition: .5s;
-}
-
-.task-complete {
-  background: lightgrey;
-  color: black;
-  text-decoration: line-through;
-  transition: .5s;
-}
-
-.task-text {
-  width: 70%;
-  text-align: left;
-  font-size: 1.5rem;
-  cursor: default;
-  overflow-wrap: break-word;
-}
-
-.text-check {
-  width: 30%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.task-checkbox {
-  width: 30%;
-}
-
-.icons-container {
-  width: 70%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.icon, .trash-icon-complete {
-  width: 50px;
-  height: 50px;
-  padding: 5px;
-  border: 1px solid lightgrey;
-  background: white;
-  border-radius: 10px;
-  transition: .5s;
-}
-
-.trash-icon-complete {
-  background: white;
-}
-
-.trash-icon-complete:hover {
-  background: rgba(255, 255, 255, 0.65);
-  cursor: pointer;
-}
-
-.icon:hover {
-  cursor: pointer;
-  background: white;
-}
-
-.edit-input {
-  width: 70%;
-  height: 50px;
-  border-radius: 15px;
-  padding: 0 20px;
-  border: 1px solid lightgrey;
-  font-size: 1.5rem;
-}
-
-.hidden {
-  display: none;
-}
-
 @media (min-device-width: 280px) and (max-device-width: 701px) {
   .tasks {
     width: 95%;
     justify-content: center;
-  }
-
-  .task,
-  .task-complete {
-    width: 100%;
-    align-items: flex-start;
-  }
-
-  .task-text {
-    width: 70%;
-  }
-
-  .text-check {
-    width: 30%;
-  }
-
-  .task-checkbox {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .icons-container {
-    width: 40%;
-    display: flex;
-    justify-content: end;
-  }
-  .icon {
-    width: 40px;
-    height: 40px;
-  }
-
-  .edit-input {
-    width: 75%;
-    height: 40px;
-  }
-
-  .text-check {
-    display: grid;
-    grid-template-columns: 1.1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-      "check edit edit"
-      "check delete delete";
-  }
-  
-  .edit {
-    grid-area: edit;
-  }
-  
-  .delete {
-    grid-area: delete;
-  }
-  
-  .task-checkbox {
-    grid-area: check;
   }
 }

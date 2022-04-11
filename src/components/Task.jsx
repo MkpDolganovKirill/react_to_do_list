@@ -36,7 +36,7 @@ const Task = ({ index, task, updateTasks }) => {
     } else {
       deleteTask(_id);
     }
-    
+
   };
 
   const cancelSet = () => {
@@ -47,60 +47,60 @@ const Task = ({ index, task, updateTasks }) => {
   return (
     <div
       className={isCheck ? "task-complete" : "task"}
-      onDoubleClick={() => {}}
+      onDoubleClick={() => { }}
     >
       <p
         className={isEdit ? 'hidden' : 'task-text'}
-      > 
+      >
         {`${index + 1}. ${text}`}
       </p>
       <input
-        className={isEdit ? 'edit-input': 'hidden'}
+        className={isEdit ? 'edit-input' : 'hidden'}
         value={value}
         onChange={e => setValue(e.target.value)}
       />
       <div className='text-check'>
-      <Checkbox
-        sx={{
-          color: grey[50],
-          '&.Mui-checked': {
-            color: grey[900],
-          },
-          '& .MuiSvgIcon-root': {
-            fontSize: 28,
-          },
-        }}
-        type={'checkbox'}
-        checked={isCheck}
-        className={"task-checkbox"}
-        onChange={e => editCheck(task)}
-      />
-      
-      <div className='edit'>
-        <img
-          className={isEdit ? 'icon' : 'hidden'}
-          src={done} alt='done'
-          onClick={() => editTask(task)}
+        <Checkbox
+          sx={{
+            color: grey[50],
+            '&.Mui-checked': {
+              color: grey[900],
+            },
+            '& .MuiSvgIcon-root': {
+              fontSize: 28,
+            },
+          }}
+          type={'checkbox'}
+          checked={isCheck}
+          className={"task-checkbox"}
+          onChange={e => editCheck(task)}
         />
-        <img 
-          className={isEdit ? 'hidden' : 'icon'}
-          src={pensil} alt='edit'
-          onClick={() => setIsEdit(!isEdit)}
-        />
-        
-      </div>
-      <div className='delete'>
-        <img
-          className={isEdit ? 'icon' : 'hidden'}
-          src={cancel} alt='cancel'
-          onClick={() => cancelSet()}
-        />
-        <img
-          className={isEdit ? 'hidden' : 'icon'}
-          src={trash} alt='delete'
-          onClick={() => deleteTask(_id)}
-        />
-      </div>
+
+        <div className='edit'>
+          <img
+            className={isEdit ? 'icon' : 'hidden'}
+            src={done} alt='done'
+            onClick={() => editTask(task)}
+          />
+          <img
+            className={isEdit || isCheck ? 'hidden' : 'icon'}
+            src={pensil} alt='edit'
+            onClick={() => setIsEdit(!isEdit)}
+          />
+
+        </div>
+        <div className='delete'>
+          <img
+            className={isEdit ? 'icon' : 'hidden'}
+            src={cancel} alt='cancel'
+            onClick={() => cancelSet()}
+          />
+          <img
+            className={isEdit ? 'hidden' : 'icon'}
+            src={trash} alt='delete'
+            onClick={() => deleteTask(_id)}
+          />
+        </div>
       </div>
     </div>
   );
