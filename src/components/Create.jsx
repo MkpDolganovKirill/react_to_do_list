@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Create.scss';
+import SnackAllert from './SnackAllert';
 
 const Create = ({ updateTasks }) => {
 
   const [value, setValue] = useState('');
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const closeAlert = () => {
+    setOpenAlert(false);
+  }
 
   const createTask = async () => {
     if (value.trim()) {
@@ -16,7 +22,7 @@ const Create = ({ updateTasks }) => {
       updateTasks();
       setValue('');
     } else {
-      alert("You can't add empty task! Please enter something...");
+      setOpenAlert(true);
     };
   };
 
@@ -37,6 +43,12 @@ const Create = ({ updateTasks }) => {
         />
         <button className='create-form-button' onClick={createTask}>create task</button>
       </div>
+      <SnackAllert
+        allertMessage={`You can't add empty task! Please, enter something...`}
+        open={openAlert}
+        onClose={closeAlert}
+        type={'error'}
+      />
     </div>
   );
 };
