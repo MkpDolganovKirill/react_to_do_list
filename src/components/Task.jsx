@@ -57,6 +57,7 @@ const Task = ({ index, task, updateTasks }) => {
         value={value}
         onChange={e => setValue(e.target.value)}
       />
+      <div className='text-check'>
       <Checkbox
         sx={{
           color: grey[50],
@@ -72,27 +73,32 @@ const Task = ({ index, task, updateTasks }) => {
         className={"task-checkbox"}
         onChange={e => editCheck(task)}
       />
-      <div className='icons-container'>
+      
+      <div className='edit'>
         <img
           className={isEdit ? 'icon' : 'hidden'}
           src={done} alt='done'
           onClick={() => editTask(task)}
-        />
-        <img
-          className={isEdit ? 'icon' : 'hidden'}
-          src={cancel} alt='cancel'
-          onClick={() => cancelSet()}
         />
         <img 
           className={isEdit ? 'hidden' : 'icon'}
           src={pensil} alt='edit'
           onClick={() => setIsEdit(!isEdit)}
         />
+        
+      </div>
+      <div className='delete'>
+        <img
+          className={isEdit ? 'icon' : 'hidden'}
+          src={cancel} alt='cancel'
+          onClick={() => cancelSet()}
+        />
         <img
           className={isEdit ? 'hidden' : 'icon'}
           src={trash} alt='delete'
           onClick={() => deleteTask(_id)}
         />
+      </div>
       </div>
     </div>
   );
