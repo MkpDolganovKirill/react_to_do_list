@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import '../styles/Task.scss';
 import Checkbox from '@mui/material/Checkbox';
 import grey from '@mui/material/colors/grey';
 import trash from '../icons/Trash.svg';
@@ -46,6 +47,7 @@ const Task = ({ index, task, updateTasks }) => {
   return (
     <div
       className={isCheck ? "task-complete" : "task"}
+      onDoubleClick={() => {}}
     >
       <p
         className={isEdit ? 'hidden' : 'task-text'}
