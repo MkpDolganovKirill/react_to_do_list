@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Create from './components/Create';
 import Tasks from './components/Tasks';
+import NotFound from './components/NotFound';
+import { 
+  Routes,
+  Route,
+  Navigate
+} from 'react-router-dom';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -35,8 +41,22 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="title">TO-DO LIST</h1>
-      <Create updateTasks={updateTasks} />
-      <Tasks allTasks={tasks} updateTasks={updateTasks} />
+      <Routes>
+        <Route path='/tasks' element={<>
+        <Create updateTasks={updateTasks} />
+        <Tasks allTasks={tasks} updateTasks={updateTasks} />
+        </>}
+        />
+        <Route
+          path="/"
+          element={<Navigate to="/tasks" replace />}
+        />
+        <Route 
+          path='*'
+          element={<NotFound />}
+        />
+      </Routes>
+      
     </div>
   );
 };
