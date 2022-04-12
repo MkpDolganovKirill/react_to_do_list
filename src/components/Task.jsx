@@ -7,17 +7,23 @@ import trash from '../icons/Trash.svg';
 import pensil from '../icons/Edit.svg';
 import cancel from '../icons/cancel.svg';
 import done from '../icons/done.svg';
+import SnackAllert from './SnackAllert';
 
-const Task = ({ index, task, updateTasks }) => {
+const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier }) => {
   const { _id, text, isCheck } = task;
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(text);
+  const [openAlert, setOpenAlert] = useState(false);
+
+  const closeAlert = () => {
+    setOpenAlert(false);
+  }
 
   const deleteTask = async (taskId) => {
-    if (window.confirm('Are you sure?')) {
-      await axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
-      updateTasks();
-    };
+    closeAlertEarlier();
+    activateDeleteAlert(task);
+    await axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
+    updateTasks();
   };
 
   const editCheck = async (editingTask) => {
@@ -34,7 +40,8 @@ const Task = ({ index, task, updateTasks }) => {
       updateTasks();
       setIsEdit(!isEdit);
     } else {
-      deleteTask(_id);
+      setOpenAlert(true);
+      setValue(text);
     }
 
   };
@@ -102,6 +109,12 @@ const Task = ({ index, task, updateTasks }) => {
           />
         </div>
       </div>
+      <SnackAllert
+        allertMessage={`You can't add empty task! Please, enter something...`}
+        open={openAlert}
+        onClose={closeAlert}
+        type={'error'}
+      />
     </div>
   );
 };

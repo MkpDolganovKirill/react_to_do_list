@@ -46,12 +46,13 @@
   font-size: 1.1rem;
   background: black;
 }
+
 @media (min-device-width: 280px) and (max-device-width: 701px) {
   .create-component {
     width: 100%;
     margin: 20px 0;
   }
-  
+
   .create-form {
     width: 99%;
     margin: 0;
