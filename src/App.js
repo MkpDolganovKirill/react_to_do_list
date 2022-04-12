@@ -9,6 +9,7 @@ import {
   Route,
   Navigate
 } from 'react-router-dom';
+import EditPage from './components/EditPage';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -44,9 +45,14 @@ const App = () => {
       <Routes>
         <Route path='/tasks' element={<>
         <Create updateTasks={updateTasks} />
-        <Tasks allTasks={tasks} updateTasks={updateTasks} />
+        <Tasks 
+          allTasks={tasks} 
+          setTasks={setTasks} 
+          updateTasks={updateTasks} 
+        />
         </>}
         />
+        <Route path='/tasks/:_id' element={<EditPage updateTasks={updateTasks} tasks={tasks}/>} />
         <Route
           path="/"
           element={<Navigate to="/tasks" replace />}
@@ -56,7 +62,6 @@ const App = () => {
           element={<NotFound />}
         />
       </Routes>
-      
     </div>
   );
 };

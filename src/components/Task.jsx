@@ -8,12 +8,14 @@ import pensil from '../icons/Edit.svg';
 import cancel from '../icons/cancel.svg';
 import done from '../icons/done.svg';
 import SnackAllert from './SnackAllert';
+import { useNavigate } from 'react-router-dom';
 
 const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier }) => {
   const { _id, text, isCheck } = task;
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(text);
   const [openAlert, setOpenAlert] = useState(false);
+  const navigate = useNavigate();
 
   const closeAlert = () => {
     setOpenAlert(false);
@@ -51,10 +53,14 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
     setValue(text);
   }
 
+  const checkEnter = (event) => {
+    if (event.code === "Enter") editTask(task);
+  };
+
   return (
     <div
       className={isCheck ? "task-complete" : "task"}
-      onDoubleClick={() => { }}
+      onDoubleClick={() => !isCheck ? setIsEdit(!isEdit) : {}}
     >
       <p
         className={isEdit ? 'hidden' : 'task-text'}
@@ -65,6 +71,7 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
         className={isEdit ? 'edit-input' : 'hidden'}
         value={value}
         onChange={e => setValue(e.target.value)}
+        onKeyDown={(e) => { checkEnter(e) }}
       />
       <div className='text-check'>
         <Checkbox
@@ -92,7 +99,7 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
           <img
             className={isEdit || isCheck ? 'hidden' : 'icon'}
             src={pensil} alt='edit'
-            onClick={() => setIsEdit(!isEdit)}
+            onClick={() => navigate(`/tasks/${_id}`)}
           />
 
         </div>
@@ -105,7 +112,7 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
           <img
             className={isEdit ? 'hidden' : 'icon'}
             src={trash} alt='delete'
-            onClick={() => deleteTask(_id)}
+            onClick={() => deleteTask(_id) }
           />
         </div>
       </div>
