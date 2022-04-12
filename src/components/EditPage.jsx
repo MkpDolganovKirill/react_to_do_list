@@ -37,13 +37,13 @@ const EditPage = ({ updateTasks }) => {
   const editTask = () => {
     if (text.trim()) {
       axios.patch('http://localhost:8000/updateTask', { ...task, text }).then(res => { 
-      updateTasks();
-      setAllertActive({
+        updateTasks();
+        setAllertActive({
         open: true, 
         type: 'success',
         allertMessage: 'Task save!',
         goToMain: true
-      });
+        });
       });
     } else {
       setAllertActive({
