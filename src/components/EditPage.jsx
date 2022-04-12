@@ -36,15 +36,14 @@ const EditPage = ({ updateTasks }) => {
 
   const editTask = () => {
     if (text.trim()) {
-      const updateTask = { ...task, text: text }
-      axios.patch('http://localhost:8000/updateTask', updateTask).then(res => { 
-        updateTasks();
-        setAllertActive({
-          open: true, 
-          type: 'success',
-          allertMessage: 'Task save!',
-          goToMain: true
-        });
+      axios.patch('http://localhost:8000/updateTask', { ...task, text }).then(res => { 
+      updateTasks();
+      setAllertActive({
+        open: true, 
+        type: 'success',
+        allertMessage: 'Task save!',
+        goToMain: true
+      });
       });
     } else {
       setAllertActive({
@@ -65,24 +64,25 @@ const EditPage = ({ updateTasks }) => {
       {task ? <div className='task-edit-page'>
         <input
           className='edit-page-input'
-          type={'text'}
+          type='text'
           value={text || ''}
           onChange={(e) => setTask({ ...task , text: e.target.value})}
           onKeyDown={(e) => checkEnter(e)}
         />
         <img
-          className={'icon'}
-          src={done} alt='done'
+          className='icon'
+          src={done} 
+          alt='done'
           onClick={() => editTask()}
         />
         <img
-          className={'icon'}
+          className='icon'
           src={cancel} 
           alt='cancel'
           onClick={() => navigate('/', { replace: true })}
         />
       </div> :
-      <NotFound text={'Task not found'}/>}
+      <NotFound text='Task not found'/>}
       <SnackAllert 
         allertMessage={allertMessage}
         type={type}

@@ -17,7 +17,7 @@ const Create = ({ updateTasks }) => {
       const newTask = {
         text: value.trim(),
         isCheck: false
-      }
+      };
       axios.post('http://localhost:8000/createTask', newTask).then(res => { 
         updateTasks();
         setValue('');
