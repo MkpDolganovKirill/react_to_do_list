@@ -34,6 +34,7 @@ const Tasks = ({ allTasks, updateTasks }) => {
           updateTasks={updateTasks}
           activateDeleteAlert={activateDeleteAlert}
           closeAlertEarlier={closeDeleteTask}
+          openDeleteTask={openDeleteTask}
         />
         )
       }
