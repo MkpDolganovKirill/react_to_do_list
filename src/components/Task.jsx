@@ -21,26 +21,27 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
     setOpenAlert(false);
   }
 
-  const deleteTask = async (taskId) => {
+  const deleteTask = (taskId) => {
     closeAlertEarlier();
     activateDeleteAlert(task);
-    await axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
+    axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => { });
     updateTasks();
   };
 
-  const editCheck = async (editingTask) => {
+  const editCheck = (editingTask) => {
     const isCheck = editingTask.isCheck;
     const updateTask = { ...editingTask, isCheck: !isCheck }
-    await axios.patch('http://localhost:8000/updateTask', updateTask).then(res => { });
+    axios.patch('http://localhost:8000/updateTask', updateTask).then(res => { });
     updateTasks();
   };
 
-  const editTask = async (editingTask) => {
+  const editTask = (editingTask) => {
     if (value.trim()) {
       const updateTask = { ...editingTask, text: value }
-      await axios.patch('http://localhost:8000/updateTask', updateTask).then(res => { });
-      updateTasks();
-      setIsEdit(!isEdit);
+      axios.patch('http://localhost:8000/updateTask', updateTask).then(res => {
+        updateTasks();
+        setIsEdit(!isEdit);
+       });
     } else {
       setOpenAlert(true);
       setValue(text);
@@ -60,7 +61,7 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
   return (
     <div
       className={isCheck ? "task-complete" : "task"}
-      onDoubleClick={() => !isCheck ? setIsEdit(!isEdit) : {}}
+      onDoubleClick={() => !isCheck && setIsEdit(!isEdit)}
     >
       <p
         className={isEdit ? 'hidden' : 'task-text'}
@@ -71,7 +72,7 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
         className={isEdit ? 'edit-input' : 'hidden'}
         value={value}
         onChange={e => setValue(e.target.value)}
-        onKeyDown={(e) => { checkEnter(e) }}
+        onKeyDown={(e) => checkEnter(e)}
       />
       <div className='text-check'>
         <Checkbox
@@ -112,7 +113,7 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
           <img
             className={isEdit ? 'hidden' : 'icon'}
             src={trash} alt='delete'
-            onClick={() => deleteTask(_id) }
+            onClick={() => deleteTask(_id)}
           />
         </div>
       </div>

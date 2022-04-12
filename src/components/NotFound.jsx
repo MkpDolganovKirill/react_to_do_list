@@ -2,7 +2,7 @@ import React from 'react'
 
 export const NotFound = ({ text }) => {
   return (
-    <div>{text ? text : 'Not found' }</div>
+    <div>{text || 'Not found' }</div>
   )
 }
 
