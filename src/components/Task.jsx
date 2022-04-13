@@ -10,7 +10,7 @@ import done from '../icons/done.svg';
 import SnackAllert from './SnackAllert';
 import { useNavigate } from 'react-router-dom';
 
-const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier }) => {
+const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier, openDeleteTask }) => {
   const { _id, text, isCheck } = task;
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(text);
@@ -115,7 +115,7 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
           <img
             className={isEdit ? 'hidden' : 'icon'}
             src={trash} alt='delete'
-            onClick={() => deleteTask(_id)}
+            onClick={() => !openDeleteTask && deleteTask(_id)}
           />
         </div>
       </div>
