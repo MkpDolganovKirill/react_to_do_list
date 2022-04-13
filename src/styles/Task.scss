@@ -5,7 +5,8 @@
 }
 
 .task,
-.task-complete {
+.task-complete,
+.task-edit-page {
   width: 700px;
   margin-top: 10px;
   display: flex;
@@ -17,6 +18,10 @@
   background: rgb(94, 94, 255);
   color: white;
   transition: .5s;
+}
+
+.task-edit-page {
+  justify-content: space-around;
 }
 
 .task-complete {
@@ -75,7 +80,8 @@
   background: white;
 }
 
-.edit-input {
+.edit-input,
+.edit-page-input {
   width: 70%;
   height: 50px;
   border-radius: 15px;
@@ -91,7 +97,8 @@
 @media (min-device-width: 280px) and (max-device-width: 701px) {
 
   .task,
-  .task-complete {
+  .task-complete,
+  .task-edit-page {
     width: 100%;
     align-items: flex-start;
   }
@@ -123,7 +130,8 @@
     height: 40px;
   }
 
-  .edit-input {
+  .edit-input,
+  .edit-page-input {
     width: 75%;
     height: 40px;
   }

@@ -1,8 +1,8 @@
 import React from 'react'
 
-export const NotFound = () => {
+export const NotFound = ({ text }) => {
   return (
-    <div>NotFound</div>
+    <div>{text || 'Not found' }</div>
   )
 }
 

@@ -17,10 +17,11 @@ const Tasks = ({ allTasks, updateTasks }) => {
     setDeletedTaskSave(deletedTask);
   }
 
-  const undoDeletedTask = async () => {
-    await axios.post('http://localhost:8000/createTask', deletedTaskSave).then(res => { });
-    updateTasks();
-    closeDeleteTask();
+  const undoDeletedTask = () => {
+    axios.post('http://localhost:8000/createTask', deletedTaskSave).then(res => {
+      updateTasks();
+      closeDeleteTask();
+    });
   }
 
   return (

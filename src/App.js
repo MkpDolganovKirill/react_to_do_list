@@ -9,6 +9,7 @@ import {
   Route,
   Navigate
 } from 'react-router-dom';
+import EditPage from './components/EditPage';
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -18,8 +19,8 @@ const App = () => {
     if (updateFlag) connect();
   }, [updateFlag]);
 
-  const connect = async () => {
-    await axios.get('http://localhost:8000/allTasks').then(res => {
+  const connect = () => {
+    axios.get('http://localhost:8000/allTasks').then(res => {
       sortTasks(res.data.data);
     });
     updateTasks();
@@ -44,9 +45,13 @@ const App = () => {
       <Routes>
         <Route path='/tasks' element={<>
         <Create updateTasks={updateTasks} />
-        <Tasks allTasks={tasks} updateTasks={updateTasks} />
+        <Tasks 
+          allTasks={tasks}
+          updateTasks={updateTasks} 
+        />
         </>}
         />
+        <Route path='/tasks/:_id' element={<EditPage updateTasks={updateTasks} />} />
         <Route
           path="/"
           element={<Navigate to="/tasks" replace />}
@@ -56,7 +61,6 @@ const App = () => {
           element={<NotFound />}
         />
       </Routes>
-      
     </div>
   );
 };

@@ -12,15 +12,16 @@ const Create = ({ updateTasks }) => {
     setOpenAlert(false);
   }
 
-  const createTask = async () => {
+  const createTask = () => {
     if (value.trim()) {
       const newTask = {
         text: value.trim(),
         isCheck: false
-      }
-      await axios.post('http://localhost:8000/createTask', newTask).then(res => { });
-      updateTasks();
-      setValue('');
+      };
+      axios.post('http://localhost:8000/createTask', newTask).then(res => { 
+        updateTasks();
+        setValue('');
+      });
     } else {
       setOpenAlert(true);
     };
