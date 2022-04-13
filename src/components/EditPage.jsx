@@ -30,7 +30,9 @@ const EditPage = ({ updateTasks }) => {
 
   const findTask = (id) => {
     axios.get(`http://localhost:8000/getTaskById?_id=${id}`).then(res => {
-      res.data !== 'Not found' ? setTask(res.data) : setTask(null);
+      setTask(res.data);
+    }).catch(reason => {
+      if (reason.response.status === 404) setTask({ text: null} );
     });
   };
 
@@ -61,7 +63,7 @@ const EditPage = ({ updateTasks }) => {
 
   return (
     <div>
-      {task ? <div className='task-edit-page'>
+      {text ? <div className='task-edit-page'>
         <input
           className='edit-page-input'
           type='text'
