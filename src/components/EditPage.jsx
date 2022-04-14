@@ -6,12 +6,12 @@ import done from '../icons/done.svg';
 import NotFound from './NotFound';
 import SnackAllert from './SnackAllert';
 
-const EditPage = ({ updateTasks }) => {
+const EditPage = ({ updateTasks, connectionFlag }) => {
   const { _id } = useParams();
   const [task, setTask] = useState({});
-  const [allertActive, setAllertActive] = useState({ 
-    open: false, 
-    type: 'error', 
+  const [allertActive, setAllertActive] = useState({
+    open: false,
+    type: 'error',
     allertMessage: '',
     goToMain: true
   });
@@ -20,7 +20,7 @@ const EditPage = ({ updateTasks }) => {
   const navigate = useNavigate();
 
   const closeAlert = () => {
-    setAllertActive({...allertActive, open: false});
+    setAllertActive({ ...allertActive, open: false });
     if (goToMain) navigate('/', { replace: true });
   }
 
@@ -32,20 +32,25 @@ const EditPage = ({ updateTasks }) => {
     axios.get(`http://localhost:8000/getTaskById?_id=${id}`).then(res => {
       setTask(res.data);
     }).catch(reason => {
-      if (reason.response.status === 404) setTask({ text: null} );
+      if (reason.response === undefined) updateTasks();
+      if (reason.response.status === 404) {
+        setTask({ text: null });
+      }
     });
   };
 
   const editTask = () => {
     if (text.trim()) {
-      axios.patch('http://localhost:8000/updateTask', { ...task, text }).then(res => { 
+      axios.patch('http://localhost:8000/updateTask', { ...task, text }).then(res => {
         updateTasks();
         setAllertActive({
-        open: true, 
-        type: 'success',
-        allertMessage: 'Task save!',
-        goToMain: true
+          open: true,
+          type: 'success',
+          allertMessage: 'Task save!',
+          goToMain: true
         });
+      }).catch(err => {
+        if (err) updateTasks();
       });
     } else {
       setAllertActive({
@@ -68,24 +73,24 @@ const EditPage = ({ updateTasks }) => {
           className='edit-page-input'
           type='text'
           value={text || ''}
-          onChange={(e) => setTask({ ...task , text: e.target.value})}
+          onChange={(e) => setTask({ ...task, text: e.target.value })}
           onKeyDown={(e) => checkEnter(e)}
         />
         <img
           className='icon'
-          src={done} 
+          src={done}
           alt='done'
           onClick={() => editTask()}
         />
         <img
           className='icon'
-          src={cancel} 
+          src={cancel}
           alt='cancel'
           onClick={() => navigate('/', { replace: true })}
         />
       </div> :
-      <NotFound text='Task not found'/>}
-      <SnackAllert 
+        <NotFound text={connectionFlag ? 'Lost connection...' : 'Task not found'} />}
+      <SnackAllert
         allertMessage={allertMessage}
         type={type}
         onClose={closeAlert}
