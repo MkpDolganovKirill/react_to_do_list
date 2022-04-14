@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../styles/Create.scss';
 import SnackAllert from './SnackAllert';
 
-const Create = ({ updateTasks }) => {
+const Create = ({ updateTasks, lostConnect }) => {
 
   const [value, setValue] = useState('');
   const [openAlert, setOpenAlert] = useState(false);
@@ -18,9 +18,11 @@ const Create = ({ updateTasks }) => {
         text: value.trim(),
         isCheck: false
       };
-      axios.post('http://localhost:8000/createTask', newTask).then(res => { 
+      axios.post('http://localhost:8000/createTask', newTask).then(res => {
         updateTasks();
         setValue('');
+      }).catch(err => {
+        if (err) updateTasks();
       });
     } else {
       setOpenAlert(true);

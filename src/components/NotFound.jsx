@@ -12,7 +12,7 @@ export const NotFound = ({ text }) => {
     } else {
       navigate('/', { replace: true });
     }
-  });
+  }, [timer]);
 
   return (
     <section>
@@ -24,7 +24,7 @@ export const NotFound = ({ text }) => {
       </div>
       <h1 className='text-notFound'>{text || 'Page not found'}</h1>
       <h2 className='text-notFound'>Redirect to the main page via:</h2>
-      <h2 className='timer-element'>{timer} {timer > 1 ? "seconds" : "second"}</h2>
+      <h2 className='timer-element'>{timer || 'just a few more'} {timer === 1 ? "second" : "seconds"}</h2>
     </section>
   )
 }

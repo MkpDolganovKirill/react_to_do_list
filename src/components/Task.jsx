@@ -26,7 +26,9 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
     activateDeleteAlert(task);
     axios.delete(`http://localhost:8000/deleteTask?_id=${taskId}`).then(res => {
       updateTasks();
-     });
+    }).catch(err => {
+      if (err) updateTasks();
+    });
   };
 
   const editCheck = (editingTask) => {
@@ -34,7 +36,9 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
     const updateTask = { ...editingTask, isCheck: !isCheck }
     axios.patch('http://localhost:8000/updateTask', updateTask).then(res => {
       updateTasks();
-     });
+    }).catch(err => {
+      if (err) updateTasks();
+    });
   };
 
   const editTask = (editingTask) => {
@@ -43,7 +47,9 @@ const Task = ({ index, task, updateTasks, activateDeleteAlert, closeAlertEarlier
       axios.patch('http://localhost:8000/updateTask', updateTask).then(res => {
         updateTasks();
         setIsEdit(!isEdit);
-       });
+      }).catch(err => {
+        if (err) updateTasks();
+      });
     } else {
       setOpenAlert(true);
       setValue(text);
