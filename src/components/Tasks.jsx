@@ -21,6 +21,8 @@ const Tasks = ({ allTasks, updateTasks }) => {
     axios.post('http://localhost:8000/createTask', deletedTaskSave).then(res => {
       updateTasks();
       closeDeleteTask();
+    }).catch(err => {
+      if (err) updateTasks();
     });
   }
 
